@@ -31,61 +31,112 @@ utils.filterType(arr, 'object');
 //=> [{a: 'b'}, {c: 'd'}]
 ```
 
-### [numbers](index.js#L54)
+### [numbers](index.js#L61)
+
+Filter `array`, returning only the numbers.
 
 * `array` **{Array}**    
 * `index` **{Array}**: Optionally specify the index of the number to return, otherwise all numbers are returned.    
 * `returns`: {Array}  
 
-Filter `array`, returning only the numbers.
+```js
+var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
 
-### [strings](index.js#L68)
+utils.numbers(arr);
+//=> [1, 2]
+```
+
+### [strings](index.js#L82)
+
+Filter `array`, returning only the strings.
 
 * `array` **{Array}**    
 * `index` **{Array}**: Optionally specify the index of the string to return, otherwise all strings are returned.    
 * `returns`: {Array}  
 
-Filter `array`, returning only the strings.
+```js
+var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
 
-### [objects](index.js#L82)
+utils.strings(arr);
+//=> ['a', 'b', 'c']
+```
+
+### [objects](index.js#L103)
+
+Filter `array`, returning only the objects.
 
 * `array` **{Array}**    
 * `index` **{Array}**: Optionally specify the index of the object to return, otherwise all objects are returned.    
 * `returns`: {Array}  
 
-Filter `array`, returning only the objects.
+```js
+var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
 
-### [functions](index.js#L96)
+utils.objects(arr);
+//=> [{a: 'b'}, {c: 'd'}]
+```
+
+### [functions](index.js#L126)
+
+Filter `array`, returning only the functions.
 
 * `array` **{Array}**    
 * `index` **{Array}**: Optionally specify the index of the function to return, otherwise all functions are returned.    
 * `returns`: {Array}  
 
-Filter `array`, returning only the functions.
+```js
+var one = function() {};
+var two = function() {};
+var arr = ['a', {a: 'b'}, 1, one, 'b', 2, {c: 'd'}, two, 'c'];
 
-### [arrays](index.js#L110)
+utils.functions(arr);
+//=> [one, two]
+```
+
+### [arrays](index.js#L147)
+
+Filter `array`, returning only the arrays.
 
 * `array` **{Array}**    
 * `index` **{Array}**: Optionally specify the index of the array to return, otherwise all arrays are returned.    
 * `returns`: {Array}  
 
-Filter `array`, returning only the arrays.
+```js
+var arr = ['a', ['aaa'], 1, 'b', ['bbb'], 2, {c: 'd'}, 'c'];
 
-### [first](index.js#L123)
+utils.objects(arr);
+//=> [['aaa'], ['bbb']]
+```
 
-* `array` **{Array}**    
-* `returns`: {*}  
+### [first](index.js#L167)
 
 Get the first element in `array`. Included for completeness.
 
-### [last](index.js#L135)
+* `array` **{Array}**    
+* `returns`: {*}  
+
+```js
+var arr = ['a', {a: 'b'}, 1, one, 'b', 2, {c: 'd'}, two, 'c'];
+
+utils.functions(arr);
+//=> 'a'
+```
+
+### [last](index.js#L185)
+
+Get the last element in `array`.
 
 * `array` **{Array}**    
 * `returns`: {*}  
 
-Get the last element in `array`.
+```js
+var arr = ['a', {a: 'b'}, 1, one, 'b', 2, {c: 'd'}, two, 'c'];
 
-### [lastOfType](index.js#L153)
+utils.functions(arr);
+//=> 'c'
+`
+
+## [lastOfType](index.js#L203)
 
 Get the last element in `array` of the given `type`.
 
@@ -99,7 +150,7 @@ lastOfType(arr, 'number');
 //=> 2
 ```
 
-### [firstOfType](index.js#L171)
+### [firstOfType](index.js#L221)
 
 Get the first element in `array` of the given `type`.
 
@@ -113,7 +164,7 @@ firstOfType(arr, 'number');
 //=> 1
 ```
 
-### [lastIsType](index.js#L189)
+### [lastIsType](index.js#L239)
 
 Returns `true` if the last element in `array` is the given `type`.
 
@@ -127,7 +178,7 @@ lastIsType(arr, 'number');
 //=> false
 ```
 
-### [firstIsType](index.js#L207)
+### [firstIsType](index.js#L257)
 
 Returns `true` if the first element in `array` is the given `type`.
 
@@ -141,7 +192,7 @@ firstIsType(arr, 'string');
 //=> true
 ```
 
-### [firstString](index.js#L224)
+### [firstString](index.js#L274)
 
 Get the first string in `array`.
 
@@ -154,7 +205,7 @@ firstString(arr, 'string');
 //=> 'a'
 ```
 
-### [lastString](index.js#L241)
+### [lastString](index.js#L291)
 
 Get the last string in `array`.
 
@@ -167,7 +218,7 @@ lastString(arr, 'string');
 //=> 'c'
 ```
 
-### [firstFunction](index.js#L258)
+### [firstFunction](index.js#L308)
 
 Get the first function in `array`.
 
@@ -180,7 +231,7 @@ firstFunction(arr, 'function');
 //=> 'a'
 ```
 
-### [lastFunction](index.js#L275)
+### [lastFunction](index.js#L325)
 
 Get the last function in `array`.
 
@@ -193,7 +244,7 @@ lastFunction(arr, 'function');
 //=> 'a'
 ```
 
-### [firstNumber](index.js#L292)
+### [firstNumber](index.js#L342)
 
 Get the first number in `array`.
 
@@ -206,7 +257,7 @@ firstNumber(arr, 'number');
 //=> '1'
 ```
 
-### [lastNumber](index.js#L309)
+### [lastNumber](index.js#L359)
 
 Get the last number in `array`.
 
@@ -219,7 +270,7 @@ lastNumber(arr, 'number');
 //=> '2'
 ```
 
-### [firstObject](index.js#L326)
+### [firstObject](index.js#L376)
 
 Get the first object in `array`.
 
@@ -232,7 +283,7 @@ firstObject(arr);
 //=> {a: 'b'}
 ```
 
-### [lastObject](index.js#L343)
+### [lastObject](index.js#L393)
 
 Get the last object in `array`.
 

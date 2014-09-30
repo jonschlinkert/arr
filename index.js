@@ -45,6 +45,13 @@ function filterType(arr, type) {
 /**
  * Filter `array`, returning only the numbers.
  *
+ * ```js
+ * var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
+ *
+ * utils.numbers(arr);
+ * //=> [1, 2]
+ * ```
+ *
  * @param  {Array} `array`
  * @param  {Array} `index` Optionally specify the index of the number to return, otherwise all numbers are returned.
  * @return {Array}
@@ -58,6 +65,13 @@ function numbers(arr, i) {
 
 /**
  * Filter `array`, returning only the strings.
+ *
+ * ```js
+ * var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
+ *
+ * utils.strings(arr);
+ * //=> ['a', 'b', 'c']
+ * ```
  *
  * @param  {Array} `array`
  * @param  {Array} `index` Optionally specify the index of the string to return, otherwise all strings are returned.
@@ -73,6 +87,13 @@ function strings(arr, i) {
 /**
  * Filter `array`, returning only the objects.
  *
+ * ```js
+ * var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
+ *
+ * utils.objects(arr);
+ * //=> [{a: 'b'}, {c: 'd'}]
+ * ```
+ *
  * @param  {Array} `array`
  * @param  {Array} `index` Optionally specify the index of the object to return, otherwise all objects are returned.
  * @return {Array}
@@ -86,6 +107,15 @@ function objects(arr, i) {
 
 /**
  * Filter `array`, returning only the functions.
+ *
+ * ```js
+ * var one = function() {};
+ * var two = function() {};
+ * var arr = ['a', {a: 'b'}, 1, one, 'b', 2, {c: 'd'}, two, 'c'];
+ *
+ * utils.functions(arr);
+ * //=> [one, two]
+ * ```
  *
  * @param  {Array} `array`
  * @param  {Array} `index` Optionally specify the index of the function to return, otherwise all functions are returned.
@@ -101,6 +131,13 @@ function functions(arr, i) {
 /**
  * Filter `array`, returning only the arrays.
  *
+ * ```js
+ * var arr = ['a', ['aaa'], 1, 'b', ['bbb'], 2, {c: 'd'}, 'c'];
+ *
+ * utils.objects(arr);
+ * //=> [['aaa'], ['bbb']]
+ * ```
+ *
  * @param  {Array} `array`
  * @param  {Array} `index` Optionally specify the index of the array to return, otherwise all arrays are returned.
  * @return {Array}
@@ -115,6 +152,13 @@ function arrays(arr, i) {
 /**
  * Get the first element in `array`. Included for completeness.
  *
+ * ```js
+ * var arr = ['a', {a: 'b'}, 1, one, 'b', 2, {c: 'd'}, two, 'c'];
+ *
+ * utils.functions(arr);
+ * //=> 'a'
+ * ```
+ *
  * @param  {Array} `array`
  * @return {*}
  * @api public
@@ -127,6 +171,12 @@ function first(arr) {
 /**
  * Get the last element in `array`.
  *
+ * ```js
+ * var arr = ['a', {a: 'b'}, 1, one, 'b', 2, {c: 'd'}, two, 'c'];
+ *
+ * utils.functions(arr);
+ * //=> 'c'
+ * `
  * @param  {Array} `array`
  * @return {*}
  * @api public
