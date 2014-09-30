@@ -85,7 +85,7 @@ Get the first element in `array`. Included for completeness.
 
 Get the last element in `array`.
 
-### [lastOf](index.js#L153)
+### [lastOfType](index.js#L153)
 
 Get the last element in `array` of the given `type`.
 
@@ -95,11 +95,11 @@ Get the last element in `array` of the given `type`.
 
 ```js
 var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
-lastOf(arr, 'number');
+lastOfType(arr, 'number');
 //=> 2
 ```
 
-### [firstOf](index.js#L171)
+### [firstOfType](index.js#L171)
 
 Get the first element in `array` of the given `type`.
 
@@ -109,11 +109,11 @@ Get the first element in `array` of the given `type`.
 
 ```js
 var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
-firstOf(arr, 'number');
+firstOfType(arr, 'number');
 //=> 1
 ```
 
-### [lastIs](index.js#L189)
+### [lastIsType](index.js#L189)
 
 Returns `true` if the last element in `array` is the given `type`.
 
@@ -123,11 +123,11 @@ Returns `true` if the last element in `array` is the given `type`.
 
 ```js
 var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
-lastIs(arr, 'number');
+lastIsType(arr, 'number');
 //=> false
 ```
 
-### [firstIs](index.js#L207)
+### [firstIsType](index.js#L207)
 
 Returns `true` if the first element in `array` is the given `type`.
 
@@ -137,11 +137,11 @@ Returns `true` if the first element in `array` is the given `type`.
 
 ```js
 var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
-firstIs(arr, 'string');
+firstIsType(arr, 'string');
 //=> true
 ```
 
-### [firstStr](index.js#L224)
+### [firstString](index.js#L224)
 
 Get the first string in `array`.
 
@@ -150,11 +150,11 @@ Get the first string in `array`.
 
 ```js
 var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
-firstStr(arr, 'string');
+firstString(arr, 'string');
 //=> 'a'
 ```
 
-### [lastStr](index.js#L241)
+### [lastString](index.js#L241)
 
 Get the last string in `array`.
 
@@ -163,11 +163,11 @@ Get the last string in `array`.
 
 ```js
 var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
-lastStr(arr, 'string');
+lastString(arr, 'string');
 //=> 'c'
 ```
 
-### [firstFn](index.js#L258)
+### [firstFunction](index.js#L258)
 
 Get the first function in `array`.
 
@@ -176,11 +176,11 @@ Get the first function in `array`.
 
 ```js
 var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
-firstFn(arr, 'function');
+firstFunction(arr, 'function');
 //=> 'a'
 ```
 
-### [lastFn](index.js#L275)
+### [lastFunction](index.js#L275)
 
 Get the last function in `array`.
 
@@ -189,11 +189,37 @@ Get the last function in `array`.
 
 ```js
 var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
-lastFn(arr, 'function');
+lastFunction(arr, 'function');
 //=> 'a'
 ```
 
-### [firstObj](index.js#L292)
+### [firstNumber](index.js#L292)
+
+Get the first number in `array`.
+
+* `array` **{Array}**    
+* `returns`: {Function}  
+
+```js
+var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
+firstNumber(arr, 'number');
+//=> '1'
+```
+
+### [lastNumber](index.js#L309)
+
+Get the last number in `array`.
+
+* `array` **{Array}**    
+* `returns`: {Function}  
+
+```js
+var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
+lastNumber(arr, 'number');
+//=> '2'
+```
+
+### [firstObject](index.js#L326)
 
 Get the first object in `array`.
 
@@ -202,11 +228,11 @@ Get the first object in `array`.
 
 ```js
 var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
-firstObj(arr);
+firstObject(arr);
 //=> {a: 'b'}
 ```
 
-### [lastObj](index.js#L309)
+### [lastObject](index.js#L343)
 
 Get the last object in `array`.
 
@@ -215,7 +241,7 @@ Get the last object in `array`.
 
 ```js
 var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
-lastObj(arr);
+lastObject(arr);
 //=> {c: 'd'}
 ```
 

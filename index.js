@@ -141,7 +141,7 @@ function last(arr) {
  *
  * ```js
  * var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
- * lastOf(arr, 'number');
+ * lastOfType(arr, 'number');
  * //=> 2
  * ```
  * @param  {Array} `array`
@@ -150,7 +150,7 @@ function last(arr) {
  * @api public
  */
 
-function lastOf(arr, type) {
+function lastOfType(arr, type) {
   return last(filterType(arr, type));
 }
 
@@ -159,7 +159,7 @@ function lastOf(arr, type) {
  *
  * ```js
  * var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
- * firstOf(arr, 'number');
+ * firstOfType(arr, 'number');
  * //=> 1
  * ```
  * @param  {Array} `array`
@@ -168,7 +168,7 @@ function lastOf(arr, type) {
  * @api public
  */
 
-function firstOf(arr, type) {
+function firstOfType(arr, type) {
   return filterType(arr, type)[0];
 }
 
@@ -177,7 +177,7 @@ function firstOf(arr, type) {
  *
  * ```js
  * var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
- * lastIs(arr, 'number');
+ * lastIsType(arr, 'number');
  * //=> false
  * ```
  * @param  {Array} `array`
@@ -186,7 +186,7 @@ function firstOf(arr, type) {
  * @api public
  */
 
-function lastIs(arr, type) {
+function lastIsType(arr, type) {
   return typeOf(last(arr)) === type;
 }
 
@@ -195,7 +195,7 @@ function lastIs(arr, type) {
  *
  * ```js
  * var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
- * firstIs(arr, 'string');
+ * firstIsType(arr, 'string');
  * //=> true
  * ```
  * @param  {Array} `array`
@@ -204,7 +204,7 @@ function lastIs(arr, type) {
  * @api public
  */
 
-function firstIs(arr, type) {
+function firstIsType(arr, type) {
   return typeOf(arr[0]) === type;
 }
 
@@ -213,7 +213,7 @@ function firstIs(arr, type) {
  *
  * ```js
  * var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
- * firstStr(arr, 'string');
+ * firstString(arr, 'string');
  * //=> 'a'
  * ```
  * @param  {Array} `array`
@@ -221,8 +221,8 @@ function firstIs(arr, type) {
  * @api public
  */
 
-function firstStr(arr) {
-  return firstOf(arr, 'string');
+function firstString(arr) {
+  return firstOfType(arr, 'string');
 }
 
 /**
@@ -230,7 +230,7 @@ function firstStr(arr) {
  *
  * ```js
  * var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
- * lastStr(arr, 'string');
+ * lastString(arr, 'string');
  * //=> 'c'
  * ```
  * @param  {Array} `array`
@@ -238,8 +238,8 @@ function firstStr(arr) {
  * @api public
  */
 
-function lastStr(arr) {
-  return lastOf(arr, 'string');
+function lastString(arr) {
+  return lastOfType(arr, 'string');
 }
 
 /**
@@ -247,7 +247,7 @@ function lastStr(arr) {
  *
  * ```js
  * var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
- * firstFn(arr, 'function');
+ * firstFunction(arr, 'function');
  * //=> 'a'
  * ```
  * @param  {Array} `array`
@@ -255,8 +255,8 @@ function lastStr(arr) {
  * @api public
  */
 
-function firstFn(arr) {
-  return firstOf(arr, 'function');
+function firstFunction(arr) {
+  return firstOfType(arr, 'function');
 }
 
 /**
@@ -264,7 +264,7 @@ function firstFn(arr) {
  *
  * ```js
  * var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
- * lastFn(arr, 'function');
+ * lastFunction(arr, 'function');
  * //=> 'a'
  * ```
  * @param  {Array} `array`
@@ -272,8 +272,42 @@ function firstFn(arr) {
  * @api public
  */
 
-function lastFn(arr) {
-  return lastOf(arr, 'function');
+function lastFunction(arr) {
+  return lastOfType(arr, 'function');
+}
+
+/**
+ * Get the first number in `array`.
+ *
+ * ```js
+ * var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
+ * firstNumber(arr, 'number');
+ * //=> '1'
+ * ```
+ * @param  {Array} `array`
+ * @return {Function}
+ * @api public
+ */
+
+function firstNumber(arr) {
+  return firstOfType(arr, 'number');
+}
+
+/**
+ * Get the last number in `array`.
+ *
+ * ```js
+ * var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
+ * lastNumber(arr, 'number');
+ * //=> '2'
+ * ```
+ * @param  {Array} `array`
+ * @return {Function}
+ * @api public
+ */
+
+function lastNumber(arr) {
+  return lastOfType(arr, 'number');
 }
 
 /**
@@ -281,7 +315,7 @@ function lastFn(arr) {
  *
  * ```js
  * var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
- * firstObj(arr);
+ * firstObject(arr);
  * //=> {a: 'b'}
  * ```
  * @param  {Array} `array`
@@ -289,8 +323,8 @@ function lastFn(arr) {
  * @api public
  */
 
-function firstObj(arr) {
-  return firstOf(arr, 'object');
+function firstObject(arr) {
+  return firstOfType(arr, 'object');
 }
 
 /**
@@ -298,7 +332,7 @@ function firstObj(arr) {
  *
  * ```js
  * var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
- * lastObj(arr);
+ * lastObject(arr);
  * //=> {c: 'd'}
  * ```
  * @param  {Array} `array`
@@ -306,8 +340,8 @@ function firstObj(arr) {
  * @api public
  */
 
-function lastObj(arr) {
-  return lastOf(arr, 'object');
+function lastObject(arr) {
+  return lastOfType(arr, 'object');
 }
 
 /**
@@ -342,24 +376,26 @@ function isObject(val) {
 }
 
 
-exports.filterType = filterType;
-exports.numbers = numbers;
-exports.strings = strings;
-exports.objects = objects;
-exports.functions = functions;
 exports.arrays = arrays;
-exports.last = last;
-exports.lastOf = lastOf;
-exports.firstOf = firstOf;
-exports.lastIs = lastIs;
-exports.firstIs = firstIs;
-exports.firstStr = firstStr;
-exports.lastStr = lastStr;
-exports.firstFn = firstFn;
-exports.lastFn = lastFn;
-exports.firstObj = firstObj;
-exports.lastObj = lastObj;
-exports.isType = isType;
-exports.isString = isString;
+exports.filterType = filterType;
+exports.first = first;
+exports.firstFunction = firstFunction;
+exports.firstIsType = firstIsType;
+exports.firstNumber = firstNumber;
+exports.firstObject = firstObject;
+exports.firstOfType = firstOfType;
+exports.firstString = firstString;
+exports.functions = functions;
 exports.isObject = isObject;
-
+exports.isString = isString;
+exports.isType = isType;
+exports.last = last;
+exports.lastFunction = lastFunction;
+exports.lastIsType = lastIsType;
+exports.lastNumber = lastNumber;
+exports.lastObject = lastObject;
+exports.lastOfType = lastOfType;
+exports.lastString = lastString;
+exports.numbers = numbers;
+exports.objects = objects;
+exports.strings = strings;
