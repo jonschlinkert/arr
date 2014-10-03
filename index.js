@@ -11,7 +11,37 @@
  * Module dependencies
  */
 
+var makeIteratory = require('make-iterator');
 var typeOf = require('kind-of');
+
+
+/**
+ * Much faster filter than JavaScript's native filter method.
+ *
+ * @param  {Array}  `arr` The array to filter
+ * @param  {Function} `cb` Callback function.
+ * @param  {Array} `thisArg`
+ * @return {Array}
+ */
+
+function filter(arr, cb, thisArg) {
+  cb = makeIterator(cb, thisArg);
+  if (arr == null) {
+    return [];
+  }
+
+  var len = arr.length;
+  var res = [];
+
+  for (var i = 0; i < len; i++) {
+    var ele = arr[i];
+
+    if (cb(ele, i, arr)) {
+      res.push(ele);
+    }
+  }
+  return res;
+}
 
 /**
  * Filter `array`, returning only the values of the given `type`.
@@ -35,6 +65,7 @@ function filterType(arr, type) {
 
   for (var i = 0; i < len; i++) {
     var ele = arr[i];
+
     if (typeOf(ele) === type) {
       res.push(ele);
     }
@@ -405,7 +436,7 @@ function lastObject(arr) {
 
 function isType(type) {
   return function (val) {
-    return typeof val === type;
+    return typeOf(val) === type;
   };
 }
 

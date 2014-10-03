@@ -16,7 +16,7 @@ var utils = require('arr');
 ```
 
 ## API
-### [filterType](index.js#L32)
+### [filterType](index.js#L62)
 
 Filter `array`, returning only the values of the given `type`.
 
@@ -31,7 +31,7 @@ utils.filterType(arr, 'object');
 //=> [{a: 'b'}, {c: 'd'}]
 ```
 
-### [numbers](index.js#L61)
+### [numbers](index.js#L92)
 
 Filter `array`, returning only the numbers.
 
@@ -46,7 +46,7 @@ utils.numbers(arr);
 //=> [1, 2]
 ```
 
-### [strings](index.js#L82)
+### [strings](index.js#L113)
 
 Filter `array`, returning only the strings.
 
@@ -61,7 +61,7 @@ utils.strings(arr);
 //=> ['a', 'b', 'c']
 ```
 
-### [objects](index.js#L103)
+### [objects](index.js#L134)
 
 Filter `array`, returning only the objects.
 
@@ -76,7 +76,7 @@ utils.objects(arr);
 //=> [{a: 'b'}, {c: 'd'}]
 ```
 
-### [functions](index.js#L126)
+### [functions](index.js#L157)
 
 Filter `array`, returning only the functions.
 
@@ -93,7 +93,7 @@ utils.functions(arr);
 //=> [one, two]
 ```
 
-### [arrays](index.js#L147)
+### [arrays](index.js#L178)
 
 Filter `array`, returning only the arrays.
 
@@ -108,7 +108,7 @@ utils.objects(arr);
 //=> [['aaa'], ['bbb']]
 ```
 
-### [first](index.js#L167)
+### [first](index.js#L198)
 
 Get the first element in `array`. Included for completeness.
 
@@ -122,7 +122,7 @@ utils.functions(arr);
 //=> 'a'
 ```
 
-### [last](index.js#L185)
+### [last](index.js#L216)
 
 Get the last element in `array`.
 
@@ -136,7 +136,7 @@ utils.functions(arr);
 //=> 'c'
 `
 
-## [lastOfType](index.js#L203)
+## [lastOfType](index.js#L234)
 
 Get the last element in `array` of the given `type`.
 
@@ -150,7 +150,7 @@ lastOfType(arr, 'number');
 //=> 2
 ```
 
-### [firstOfType](index.js#L221)
+### [firstOfType](index.js#L252)
 
 Get the first element in `array` of the given `type`.
 
@@ -164,7 +164,7 @@ firstOfType(arr, 'number');
 //=> 1
 ```
 
-### [lastIsType](index.js#L239)
+### [lastIsType](index.js#L270)
 
 Returns `true` if the last element in `array` is the given `type`.
 
@@ -178,7 +178,7 @@ lastIsType(arr, 'number');
 //=> false
 ```
 
-### [firstIsType](index.js#L257)
+### [firstIsType](index.js#L288)
 
 Returns `true` if the first element in `array` is the given `type`.
 
@@ -192,7 +192,7 @@ firstIsType(arr, 'string');
 //=> true
 ```
 
-### [firstString](index.js#L274)
+### [firstString](index.js#L305)
 
 Get the first string in `array`.
 
@@ -205,7 +205,7 @@ firstString(arr, 'string');
 //=> 'a'
 ```
 
-### [lastString](index.js#L291)
+### [lastString](index.js#L322)
 
 Get the last string in `array`.
 
@@ -218,7 +218,7 @@ lastString(arr, 'string');
 //=> 'c'
 ```
 
-### [firstFunction](index.js#L308)
+### [firstFunction](index.js#L339)
 
 Get the first function in `array`.
 
@@ -231,7 +231,7 @@ firstFunction(arr, 'function');
 //=> 'a'
 ```
 
-### [lastFunction](index.js#L325)
+### [lastFunction](index.js#L356)
 
 Get the last function in `array`.
 
@@ -244,7 +244,7 @@ lastFunction(arr, 'function');
 //=> 'a'
 ```
 
-### [firstNumber](index.js#L342)
+### [firstNumber](index.js#L373)
 
 Get the first number in `array`.
 
@@ -257,7 +257,7 @@ firstNumber(arr, 'number');
 //=> '1'
 ```
 
-### [lastNumber](index.js#L359)
+### [lastNumber](index.js#L390)
 
 Get the last number in `array`.
 
@@ -270,7 +270,7 @@ lastNumber(arr, 'number');
 //=> '2'
 ```
 
-### [firstObject](index.js#L376)
+### [firstObject](index.js#L407)
 
 Get the first object in `array`.
 
@@ -283,7 +283,7 @@ firstObject(arr);
 //=> {a: 'b'}
 ```
 
-### [lastObject](index.js#L393)
+### [lastObject](index.js#L424)
 
 Get the last object in `array`.
 
@@ -303,10 +303,39 @@ lastObject(arr);
 + [github/jonschlinkert](https://github.com/jonschlinkert)
 + [twitter/jonschlinkert](http://twitter.com/jonschlinkert) 
 
+### Other javascript/node.js utils
+
+Other projects that I maintain:
+
+  - [assemble](https://github.com/jonschlinkert/assemble)
+  - [verb](https://github.com/jonschlinkert/verb)
+  - [less.js](https://github.com/jonschlinkert/less.js)
+  - [handlebars-helpers](https://github.com/jonschlinkert/handlebars-helpers)
+  - [arr](https://github.com/jonschlinkert/arr)
+  - [arr-diff](https://github.com/jonschlinkert/arr-diff)
+  - [array-last](https://github.com/jonschlinkert/array-last)
+  - [array-slice](https://github.com/jonschlinkert/array-slice)
+  - [array-sum](https://github.com/jonschlinkert/array-sum)
+  - [arrayify-compact](https://github.com/jonschlinkert/arrayify-compact)
+  - [compact-object](https://github.com/jonschlinkert/compact-object)
+  - [delete](https://github.com/jonschlinkert/delete)
+  - [for-in](https://github.com/jonschlinkert/for-in)
+  - [for-own](https://github.com/jonschlinkert/for-own)
+  - [has-any](https://github.com/jonschlinkert/has-any)
+  - [has-value](https://github.com/jonschlinkert/has-value)
+  - [is-number](https://github.com/jonschlinkert/is-number)
+  - [is-plain-object](https://github.com/jonschlinkert/is-plain-object)
+  - [mixin-deep](https://github.com/jonschlinkert/mixin-deep)
+  - [mixin-object](https://github.com/jonschlinkert/mixin-object)
+  - [object-length](https://github.com/jonschlinkert/object-length)
+  - [omit-empty](https://github.com/jonschlinkert/omit-empty)
+  - [reduce-object](https://github.com/jonschlinkert/reduce-object)
+
+
 ## License
 Copyright (c) 2014 Jon Schlinkert, contributors.  
 Released under the MIT license
 
 ***
 
-_This file was generated by [verb-cli](https://github.com/assemble/verb-cli) on September 30, 2014._
+_This file was generated by [verb-cli](https://github.com/assemble/verb-cli) on October 02, 2014._

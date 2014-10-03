@@ -1,7 +1,7 @@
 {
   "name": "arr",
   "description": "Simple JavaScript utilities for working with arrays.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/jonschlinkert/arr",
   "author": {
     "name": "Jon Schlinkert",
@@ -65,6 +65,7 @@
     "verb-tag-jscomments": "^0.2.2"
   },
   "dependencies": {
-    "kind-of": "^0.1.0"
+    "kind-of": "^0.1.0",
+    "make-iterator": "^0.1.0"
   }
 }
