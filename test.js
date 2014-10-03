@@ -10,6 +10,12 @@
 var should = require('should');
 var utils = require('./');
 
+// Helper
+function type(type) {
+  return function(val) {
+    return typeof val === type;
+  };
+}
 
 describe('array utils', function () {
   var one = function a() {};
@@ -27,12 +33,30 @@ describe('array utils', function () {
     });
   });
 
-  describe('.firstIndexOf()', function () {
+  describe('.firstIndex()', function () {
     it('should return the first index of `type`', function () {
-      utils.firstIndexOf(fixture1, 'string').should.equal(0);
-      utils.firstIndexOf(fixture1, 'number').should.equal(3);
-      utils.firstIndexOf(fixture1, 'object').should.equal(2);
-      utils.firstIndexOf(fixture1, 'function').should.equal(1);
+      utils.firstIndex(fixture1, type('string')).should.equal(0);
+      utils.firstIndex(fixture1, type('number')).should.equal(3);
+      utils.firstIndex(fixture1, type('object')).should.equal(2);
+      utils.firstIndex(fixture1, type('function')).should.equal(1);
+    });
+  });
+
+  describe('.findFirst()', function () {
+    it('should return the first index of `type`', function () {
+      utils.findFirst(fixture1, type('string')).should.equal('a');
+      utils.findFirst(fixture1, type('number')).should.equal(1);
+      utils.findFirst(fixture1, type('object')).should.eql({a: 'b'});
+      utils.findFirst(fixture1, type('function')).should.eql(one);
+    });
+  });
+
+  describe('.findLast()', function () {
+    it('should return the first index of `type`', function () {
+      utils.findLast(fixture1, type('string')).should.equal('c');
+      utils.findLast(fixture1, type('number')).should.equal(2);
+      utils.findLast(fixture1, type('object')).should.eql({c: 'd'});
+      utils.findLast(fixture1, type('function')).should.eql(two);
     });
   });
 

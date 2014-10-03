@@ -11,7 +11,7 @@
  * Module dependencies
  */
 
-var makeIteratory = require('make-iterator');
+var makeIterator = require('make-iterator');
 var typeOf = require('kind-of');
 
 
@@ -29,10 +29,8 @@ function filter(arr, cb, thisArg) {
   if (arr == null) {
     return [];
   }
-
   var len = arr.length;
   var res = [];
-
   for (var i = 0; i < len; i++) {
     var ele = arr[i];
 
@@ -62,10 +60,8 @@ function filter(arr, cb, thisArg) {
 function filterType(arr, type) {
   var len = arr.length;
   var res = [];
-
   for (var i = 0; i < len; i++) {
     var ele = arr[i];
-
     if (typeOf(ele) === type) {
       res.push(ele);
     }
@@ -77,7 +73,7 @@ function filterType(arr, type) {
  * Return the first index of the given `type`, or `-1` if not found.
  *
  * ```js
- * utils.firstIndexOf(['a', 1, 'b', 2, {c: 'd'}, 'c'], 'object');
+ * utils.firstIndex(['a', 1, 'b', 2, {c: 'd'}, 'c'], 'object');
  * //=> 4
  * ```
  *
@@ -87,19 +83,88 @@ function filterType(arr, type) {
  * @api public
  */
 
-function firstIndexOf(arr, type) {
+function firstIndex(arr, cb, thisArg) {
+  cb = makeIterator(cb, thisArg);
+  if (arr == null) {
+    return -1;
+  }
   var len = arr.length;
-  var idx = -1;
-
   for (var i = 0; i < len; i++) {
-    var ele = arr[i];
-
-    if (typeOf(ele) === type) {
-      idx = i;
-      break;
+    if (cb(arr[i], i, arr)) {
+      return i;
     }
   }
-  return idx;
+  return -1;
+}
+
+/**
+ * Return the first index of the given `type`, or `-1` if not found.
+ *
+ * ```js
+ * utils.firstIndex(['a', 1, 'b', 2, {c: 'd'}, 'c'], 'object');
+ * //=> 4
+ * ```
+ *
+ * @param  {Array} `array`
+ * @param  {String} `type` Native type, e.g. `string`, `object`
+ * @return {Boolean}
+ * @api public
+ */
+
+function findFirst(arr, cb, thisArg) {
+  var i = firstIndex(arr, cb, thisArg);
+  return i >= 0 ? arr[i] : void(42);
+}
+
+
+/**
+ * Return the first index of the given `type`, or `-1` if not found.
+ *
+ * ```js
+ * utils.firstIndex(['a', 1, 'b', 2, {c: 'd'}, 'c'], 'object');
+ * //=> 4
+ * ```
+ *
+ * @param  {Array} `array`
+ * @param  {String} `type` Native type, e.g. `string`, `object`
+ * @return {Boolean}
+ * @api public
+ */
+
+function lastIndex(arr, cb, thisArg) {
+  cb = makeIterator(cb, thisArg);
+  if (arr == null) {
+    return -1;
+  }
+
+  var len = arr.length - 1;
+
+  for (var i = len; i >= 0; i--) {
+    var key = arr[i];
+    if (cb(arr[i], i, arr)) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+/**
+ * Return the first index of the given `type`, or `-1` if not found.
+ *
+ * ```js
+ * utils.firstIndex(['a', 1, 'b', 2, {c: 'd'}, 'c'], 'object');
+ * //=> 4
+ * ```
+ *
+ * @param  {Array} `array`
+ * @param  {String} `type` Native type, e.g. `string`, `object`
+ * @return {Boolean}
+ * @api public
+ */
+
+function findLast(arr, cb, thisArg) {
+  var i = lastIndex(arr, cb, thisArg);
+  return i >= 0 ? arr[i] : void(42);
 }
 
 /**
@@ -114,13 +179,33 @@ function firstIndexOf(arr, type) {
  *
  * @param  {Array} `array`
  * @param  {Array} `index` Optionally specify the index of the number to return, otherwise all numbers are returned.
- * @return {Array}
+ * @return {Array} Array of numbers or empty array.
+ * @api public
+ */
+
+function hasType(arr, val) {
+  return arr.indexOf(val) !== -1;
+}
+
+/**
+ * Filter `array`, returning only the numbers.
+ *
+ * ```js
+ * var arr = ['a', {a: 'b'}, 1, 'b', 2, {c: 'd'}, 'c'];
+ *
+ * utils.numbers(arr);
+ * //=> [1, 2]
+ * ```
+ *
+ * @param  {Array} `array`
+ * @param  {Array} `index` Optionally specify the index of the number to return, otherwise all numbers are returned.
+ * @return {Array} Array of numbers or empty array.
  * @api public
  */
 
 function numbers(arr, i) {
-  var type = filterType(arr, 'number');
-  return i ? type[i] : type;
+  var values = filterType(arr, 'number');
+  return i ? values[i] : values;
 }
 
 /**
@@ -135,13 +220,13 @@ function numbers(arr, i) {
  *
  * @param  {Array} `array`
  * @param  {Array} `index` Optionally specify the index of the string to return, otherwise all strings are returned.
- * @return {Array}
+ * @return {Array} Array of strings or empty array.
  * @api public
  */
 
 function strings(arr, i) {
-  var type = filterType(arr, 'string');
-  return i ? type[i] : type;
+  var values = filterType(arr, 'string');
+  return i ? values[i] : values;
 }
 
 /**
@@ -156,13 +241,13 @@ function strings(arr, i) {
  *
  * @param  {Array} `array`
  * @param  {Array} `index` Optionally specify the index of the object to return, otherwise all objects are returned.
- * @return {Array}
+ * @return {Array} Array of objects or empty array.
  * @api public
  */
 
 function objects(arr, i) {
-  var type = filterType(arr, 'object');
-  return i ? type[i] : type;
+  var values = filterType(arr, 'object');
+  return i ? values[i] : values;
 }
 
 /**
@@ -179,13 +264,13 @@ function objects(arr, i) {
  *
  * @param  {Array} `array`
  * @param  {Array} `index` Optionally specify the index of the function to return, otherwise all functions are returned.
- * @return {Array}
+ * @return {Array} Array of functions or empty array.
  * @api public
  */
 
 function functions(arr, i) {
-  var type = filterType(arr, 'function');
-  return i ? type[i] : type;
+  var values = filterType(arr, 'function');
+  return i ? values[i] : values;
 }
 
 /**
@@ -200,13 +285,13 @@ function functions(arr, i) {
  *
  * @param  {Array} `array`
  * @param  {Array} `index` Optionally specify the index of the array to return, otherwise all arrays are returned.
- * @return {Array}
+ * @return {Array} Array of arrays or empty array.
  * @api public
  */
 
 function arrays(arr, i) {
-  var type = filterType(arr, 'array');
-  return i ? type[i] : type;
+  var values = filterType(arr, 'array');
+  return i ? values[i] : values;
 }
 
 /**
@@ -224,8 +309,14 @@ function arrays(arr, i) {
  * @api public
  */
 
-function first(arr) {
-  return arr[0];
+function first(arr, cb, thisArg) {
+  var args = [].slice.call(arguments);
+
+  if (args.length === 1) {
+    return arr[0];
+  }
+
+  return firstIndex(arr, cb, thisArg);
 }
 
 /**
@@ -242,8 +333,14 @@ function first(arr) {
  * @api public
  */
 
-function last(arr) {
-  return arr[arr.length - 1];
+function last(arr, cb, thisArg) {
+  var args = [].slice.call(arguments);
+
+  if (args.length === 1) {
+    return arr[arr.length - 1];
+  }
+
+  return lastIndex(arr, cb, thisArg);
 }
 
 /**
@@ -481,28 +578,41 @@ function isString(val) {
   return typeOf(val) === 'string';
 }
 
+function isFunction(val) {
+  return typeOf(val) === 'string';
+}
+
+function isArray(val) {
+  return typeOf(val) === 'string';
+}
+
 function isObject(val) {
   return typeOf(val) === 'string';
 }
 
-
 exports.arrays = arrays;
 exports.filter = filter;
 exports.filterType = filterType;
+exports.findFirst = findFirst;
+exports.findLast = findLast;
 exports.first = first;
 exports.firstFunction = firstFunction;
-exports.firstIndexOf = firstIndexOf;
+exports.firstIndex = firstIndex;
 exports.firstIsType = firstIsType;
 exports.firstNumber = firstNumber;
 exports.firstObject = firstObject;
 exports.firstOfType = firstOfType;
 exports.firstString = firstString;
 exports.functions = functions;
+exports.hasType = hasType;
+exports.isArray = isArray;
+exports.isFunction = isFunction;
 exports.isObject = isObject;
 exports.isString = isString;
 exports.isType = isType;
 exports.last = last;
 exports.lastFunction = lastFunction;
+exports.lastIndex = lastIndex;
 exports.lastIsType = lastIsType;
 exports.lastNumber = lastNumber;
 exports.lastObject = lastObject;
