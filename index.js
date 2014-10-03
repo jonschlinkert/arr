@@ -207,7 +207,7 @@ function first(arr) {
  *
  * utils.functions(arr);
  * //=> 'c'
- * `
+ * ```
  * @param  {Array} `array`
  * @return {*}
  * @api public

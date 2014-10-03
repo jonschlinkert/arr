@@ -134,9 +134,9 @@ var arr = ['a', {a: 'b'}, 1, one, 'b', 2, {c: 'd'}, two, 'c'];
 
 utils.functions(arr);
 //=> 'c'
-`
+```
 
-## [lastOfType](index.js#L234)
+### [lastOfType](index.js#L234)
 
 Get the last element in `array` of the given `type`.
 
