@@ -74,6 +74,35 @@ function filterType(arr, type) {
 }
 
 /**
+ * Return the first index of the given `type`, or `-1` if not found.
+ *
+ * ```js
+ * utils.firstIndexOf(['a', 1, 'b', 2, {c: 'd'}, 'c'], 'object');
+ * //=> 4
+ * ```
+ *
+ * @param  {Array} `array`
+ * @param  {String} `type` Native type, e.g. `string`, `object`
+ * @return {Boolean}
+ * @api public
+ */
+
+function firstIndexOf(arr, type) {
+  var len = arr.length;
+  var idx = -1;
+
+  for (var i = 0; i < len; i++) {
+    var ele = arr[i];
+
+    if (typeOf(ele) === type) {
+      idx = i;
+      break;
+    }
+  }
+  return idx;
+}
+
+/**
  * Filter `array`, returning only the numbers.
  *
  * ```js
@@ -458,9 +487,11 @@ function isObject(val) {
 
 
 exports.arrays = arrays;
+exports.filter = filter;
 exports.filterType = filterType;
 exports.first = first;
 exports.firstFunction = firstFunction;
+exports.firstIndexOf = firstIndexOf;
 exports.firstIsType = firstIsType;
 exports.firstNumber = firstNumber;
 exports.firstObject = firstObject;
