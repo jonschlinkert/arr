@@ -11,9 +11,49 @@
  * Module dependencies
  */
 
+var assert = require('assert');
 var makeIterator = require('make-iterator');
 var typeOf = require('kind-of');
 
+
+/**
+ * Custom `indexOf` implementation that works with sparse arrays
+ * to provide consisten results in any environment or browser.
+ *
+ * @param  {Array} `arr`
+ * @param  {*} `value`
+ * @param  {Array} `start` Optionally define a starting index.
+ * @return {Array}
+ */
+
+function indexOf(arr, value, start) {
+  start = start || 0;
+  if (arr == null) {
+    return -1;
+  }
+  var len = arr.length;
+  var i = start < 0 ? len + start : start;
+  while (i < len) {
+    if (arr[i] === value) {
+      return i;
+    }
+    i++;
+  }
+  return -1;
+}
+
+/**
+ * Return `true` if the give `array` contains `value`.
+ * Alias for `[indexOf]`.
+ *
+ * @param  {Array}  `array` The array to check.
+ * @param  {*} `value`
+ * @return {Boolean}
+ */
+
+function contains(arr, val) {
+  return indexOf(arr, value);
+}
 
 /**
  * Much faster filter than JavaScript's native filter method.
@@ -116,7 +156,6 @@ function findFirst(arr, cb, thisArg) {
   return i >= 0 ? arr[i] : void(42);
 }
 
-
 /**
  * Return the first index of the given `type`, or `-1` if not found.
  *
@@ -138,10 +177,10 @@ function lastIndex(arr, cb, thisArg) {
   }
 
   var len = arr.length - 1;
-
   for (var i = len; i >= 0; i--) {
     var key = arr[i];
-    if (cb(arr[i], i, arr)) {
+
+    if (cb(key, i, arr)) {
       return i;
     }
   }
@@ -183,8 +222,9 @@ function findLast(arr, cb, thisArg) {
  * @api public
  */
 
-function hasType(arr, val) {
-  return arr.indexOf(val) !== -1;
+function hasType(arr, type) {
+  var i = firstIndex(arr, isType(type));
+  return i === -1 ? false : true;
 }
 
 /**
@@ -295,13 +335,17 @@ function arrays(arr, i) {
 }
 
 /**
- * Get the first element in `array`. Included for completeness.
+ * Return the first element in `array`, or, if a callback is passed,
+ * return the first value for which the returns true.
  *
  * ```js
  * var arr = ['a', {a: 'b'}, 1, one, 'b', 2, {c: 'd'}, two, 'c'];
  *
- * utils.functions(arr);
+ * utils.first(arr);
  * //=> 'a'
+ *
+ * utils.first(arr, isType('object'));
+ * //=> {a: 'b'}
  * ```
  *
  * @param  {Array} `array`
@@ -310,23 +354,25 @@ function arrays(arr, i) {
  */
 
 function first(arr, cb, thisArg) {
-  var args = [].slice.call(arguments);
-
-  if (args.length === 1) {
-    return arr[0];
+  if (arguments.length !== 1) {
+    return findFirst(arr, cb, thisArg);
   }
-
-  return firstIndex(arr, cb, thisArg);
+  return arr[0];
 }
 
 /**
- * Get the last element in `array`.
+ * Return the last element in `array`, or, if a callback is passed,
+ * return the last value for which the returns true.
  *
  * ```js
+ * // `one` and `two` are functions
  * var arr = ['a', {a: 'b'}, 1, one, 'b', 2, {c: 'd'}, two, 'c'];
  *
- * utils.functions(arr);
+ * utils.last(arr);
  * //=> 'c'
+ *
+ * utils.last(arr, isType('function'));
+ * //=> two
  * ```
  * @param  {Array} `array`
  * @return {*}
@@ -334,13 +380,10 @@ function first(arr, cb, thisArg) {
  */
 
 function last(arr, cb, thisArg) {
-  var args = [].slice.call(arguments);
-
-  if (args.length === 1) {
-    return arr[arr.length - 1];
+  if (arguments.length !== 1) {
+    return findLast(arr, cb, thisArg);
   }
-
-  return lastIndex(arr, cb, thisArg);
+  return arr[arr.length - 1];
 }
 
 /**
@@ -579,18 +622,26 @@ function isString(val) {
 }
 
 function isFunction(val) {
-  return typeOf(val) === 'string';
+  return typeOf(val) === 'function';
 }
 
 function isArray(val) {
-  return typeOf(val) === 'string';
+  return typeOf(val) === 'array';
 }
 
 function isObject(val) {
-  return typeOf(val) === 'string';
+  return typeOf(val) === 'object';
 }
 
+
+/**
+ * Export methods
+ *
+ * @type {Object}
+ */
+
 exports.arrays = arrays;
+exports.contains = contains;
 exports.filter = filter;
 exports.filterType = filterType;
 exports.findFirst = findFirst;
@@ -605,6 +656,7 @@ exports.firstOfType = firstOfType;
 exports.firstString = firstString;
 exports.functions = functions;
 exports.hasType = hasType;
+exports.indexOf = indexOf;
 exports.isArray = isArray;
 exports.isFunction = isFunction;
 exports.isObject = isObject;

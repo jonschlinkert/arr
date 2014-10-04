@@ -11,7 +11,7 @@ var should = require('should');
 var utils = require('./');
 
 // Helper
-function type(type) {
+var type = function type(type) {
   return function(val) {
     return typeof val === type;
   };
@@ -31,6 +31,10 @@ describe('array utils', function () {
       utils.filterType(fixture2, 'object').should.eql([{a: 'b'}, {c: 'd'}]);
       utils.filterType(fixture2, 'string').should.eql(['a', 'b', 'c']);
     });
+
+    it.skip('should return a filtered array with only elements of the given type.', function () {
+      utils.filterType(null, 'number').should.eql([]);
+    });
   });
 
   describe('.firstIndex()', function () {
@@ -43,6 +47,9 @@ describe('array utils', function () {
   });
 
   describe('.findFirst()', function () {
+    it.skip('should return the first index of `type`', function () {
+      utils.findFirst(null, type('string')).should.equal('a');
+    });
     it('should return the first index of `type`', function () {
       utils.findFirst(fixture1, type('string')).should.equal('a');
       utils.findFirst(fixture1, type('number')).should.equal(1);
