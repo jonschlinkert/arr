@@ -1,7 +1,7 @@
 {
   "name": "arr",
-  "description": "Simple JavaScript utilities for working with arrays.",
-  "version": "0.1.4",
+  "description": "JavaScript utilities for arrays.",
+  "version": "0.1.5",
   "homepage": "https://github.com/jonschlinkert/arr",
   "author": {
     "name": "Jon Schlinkert",

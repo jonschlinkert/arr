@@ -58,6 +58,50 @@ describe('array utils', function () {
     });
   });
 
+  describe('.first()', function () {
+    describe('when one argument is passed:', function () {
+      it('should return the first element in the array.', function () {
+        utils.first(fixture1).should.equal('a');
+      });
+    });
+
+    describe('when a callback is passed as the second arg:', function () {
+      it('should return the first element in the array for which the callback returns `true`.', function () {
+        utils.first(fixture1, type('number')).should.equal(1);
+        utils.first(fixture2, type('number')).should.equal(1);
+      });
+    });
+
+    describe('when a string is passed as the second arg:', function () {
+      it('should return the first element in the array for which `typeof` equals the given string, using strict equality for comparisons', function () {
+        utils.first(fixture1, 'number').should.equal(1);
+        utils.first(fixture2, 'number').should.equal(1);
+      });
+    });
+  });
+
+  describe('.last()', function () {
+    describe('when one argument is passed:', function () {
+      it('should return the last element in the array.', function () {
+        utils.last(fixture1).should.equal('c');
+      });
+    });
+
+    describe('when a callback is passed as the second arg:', function () {
+      it('should return the last element in the array for which the callback returns `true`.', function () {
+        utils.last(fixture1, type('number')).should.equal(2);
+        utils.last(fixture2, type('number')).should.equal(5);
+      });
+    });
+
+    describe('when a string is passed as the second arg:', function () {
+      it('should return the last element in the array for which `typeof` equals the given string, using strict equality for comparisons', function () {
+        utils.last(fixture1, 'number').should.equal(2);
+        utils.last(fixture2, 'number').should.equal(5);
+      });
+    });
+  });
+
   describe('.findLast()', function () {
     it('should return the first index of `type`', function () {
       utils.findLast(fixture1, type('string')).should.equal('c');

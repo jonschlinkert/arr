@@ -13,6 +13,7 @@
 
 var assert = require('assert');
 var makeIterator = require('make-iterator');
+
 var typeOf = require('kind-of');
 
 
@@ -43,7 +44,7 @@ function indexOf(arr, value, start) {
 }
 
 /**
- * Return `true` if the give `array` contains `value`.
+ * Return `true` if the given `array` contains `value`.
  * Alias for `[indexOf]`.
  *
  * @param  {Array}  `array` The array to check.
@@ -56,7 +57,35 @@ function contains(arr, val) {
 }
 
 /**
- * Much faster filter than JavaScript's native filter method.
+ * Return `true` if the callback returns `true`
+ * for every element in the `array`.
+ *
+ * @param  {Array}  `array` The array to check.
+ * @param  {*} `value`
+ * @return {Boolean}
+ */
+
+function every(arr, cb, thisArg) {
+  cb = makeIterator(cb, thisArg);
+  var result = true;
+  if (arr == null) {
+    return result;
+  }
+
+  var len = arr.length;
+  var i = -1;
+
+  while (++i < len) {
+    if (!cb(arr[i], i, arr)) {
+      result = false;
+      break;
+    }
+  }
+  return result;
+}
+
+/**
+ * Like JavaScript's native filter method, but faster.
  *
  * @param  {Array}  `arr` The array to filter
  * @param  {Function} `cb` Callback function.
@@ -346,6 +375,9 @@ function arrays(arr, i) {
  *
  * utils.first(arr, isType('object'));
  * //=> {a: 'b'}
+ *
+ * utils.first(arr, 'object');
+ * //=> {a: 'b'}
  * ```
  *
  * @param  {Array} `array`
@@ -354,10 +386,13 @@ function arrays(arr, i) {
  */
 
 function first(arr, cb, thisArg) {
-  if (arguments.length !== 1) {
-    return findFirst(arr, cb, thisArg);
+  if (arguments.length === 1) {
+    return arr[0];
   }
-  return arr[0];
+  if (typeOf(cb) === 'string') {
+    return findFirst(arr, isType(cb));
+  }
+  return findFirst(arr, cb, thisArg);
 }
 
 /**
@@ -373,6 +408,9 @@ function first(arr, cb, thisArg) {
  *
  * utils.last(arr, isType('function'));
  * //=> two
+ *
+ * utils.last(arr, 'object');
+ * //=> {c: 'd'}
  * ```
  * @param  {Array} `array`
  * @return {*}
@@ -380,10 +418,13 @@ function first(arr, cb, thisArg) {
  */
 
 function last(arr, cb, thisArg) {
-  if (arguments.length !== 1) {
-    return findLast(arr, cb, thisArg);
+  if (arguments.length === 1) {
+    return arr[arr.length - 1];
   }
-  return arr[arr.length - 1];
+  if (typeOf(cb) === 'string') {
+    return findLast(arr, isType(cb));
+  }
+  return findLast(arr, cb, thisArg);
 }
 
 /**
@@ -621,6 +662,10 @@ function isString(val) {
   return typeOf(val) === 'string';
 }
 
+function typeOf(val) {
+  return typeOf(val);
+}
+
 function isFunction(val) {
   return typeOf(val) === 'function';
 }
@@ -642,6 +687,7 @@ function isObject(val) {
 
 exports.arrays = arrays;
 exports.contains = contains;
+exports.every = every;
 exports.filter = filter;
 exports.filterType = filterType;
 exports.findFirst = findFirst;
